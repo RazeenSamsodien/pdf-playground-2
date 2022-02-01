@@ -1,0 +1,33 @@
+import sys
+
+inputs = sys.argv[1:]
+
+def pdf_combiner(pdf_list):
+    merger = PyPDF2.PdfFileMerger()
+    for pdf in pdf_list:
+        print(pdf)
+        merger.append(pdf)
+    merger.write('super5.pdf')
+
+pdf_combiner(inputs)
+
+inputs = sys.argv[1:]
+
+for file in inputs:
+
+
+def create_watermark(input_pdf, output, watermark):
+    watermark_obj = PdfFileReader(watermark)
+    watermark_page = watermark_obj.getPage(0)
+
+    pdf_reader = PdfFileReader(input_pdf)
+    pdf_writer = PdfFileWriter()
+
+    # Watermark all the pages
+    for page in range(pdf_reader.getNumPages()):
+        page = pdf_reader.getPage(page)
+        page.mergePage(watermark_page)
+        pdf_writer.addPage(page)
+
+    with open(output, 'wb') as out:
+        pdf_writer.write(out)
